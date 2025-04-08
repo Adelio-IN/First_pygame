@@ -1,3 +1,7 @@
+import tkinter as tk
+import random
+from tkinter import messagebox
+
 class ShootingGame:
     def __init__(self):
         #게임을 표시할 윈도우 생성 / 제목 표시
