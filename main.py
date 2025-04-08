@@ -58,3 +58,25 @@ class ShootingGame:
             command=self.exit_game
         )
         self.exit_button.pack(side=tk.LEFT) # 왼쪽 공간에 이어 붙이기
+
+        # 게임이 window.mainloop() 실행되면 업데이트 함수 실행
+        #  -> start_game() 실행되면 시작해야 되므로
+        #   프로그램 동작과 동시에 게임 시작하는 기존 내용 삭제
+        # self.update_game()
+
+        def exit_game(self):
+            self.running = False
+            self.window.destroy()
+
+        def start_game(self):
+            if not self.running:
+                self.running = True
+                self.update_game()
+
+        def pause_game(self):
+            self.running = False
+
+        def resume_game(self):
+            if not self.running:
+                self.running = True
+                self.update_game()
