@@ -64,19 +64,47 @@ class ShootingGame:
         #   프로그램 동작과 동시에 게임 시작하는 기존 내용 삭제
         # self.update_game()
 
-        def exit_game(self):
-            self.running = False
-            self.window.destroy()
+    def exit_game(self):
+        self.running = False
+        self.window.destroy()
 
-        def start_game(self):
-            if not self.running:
-                self.running = True
-                self.update_game()
+    def start_game(self):
+        if not self.running:
+            self.running = True
+            self.update_game()
 
-        def pause_game(self):
-            self.running = False
+    def pause_game(self):
+        self.running = False
 
-        def resume_game(self):
-            if not self.running:
-                self.running = True
-                self.update_game()
+    def resume_game(self):
+        if not self.running:
+            self.running = True
+            self.update_game()
+
+    def move_left(self, event, distance: int = -20):
+        '''
+        왼쪽으로 distance 값 만큼 이동
+        - event: self.window.bind("<Left>")에 등록된 왼쪽 방향키를 누른 경우
+        - distance: 이동할 거리: 음(-)의 방향으로 20만큼
+        '''
+        if self.running:
+            self.canvas.move(self.player, distance, 0)
+
+    def move_right(self, event, distance: int = 20):
+        '''
+        오른쪽으로 distance 값 만큼 이동
+        - event: self.window.bind("<Right>")에 등록된 오른쪽 방향키를 누른 경우
+        - distance: 이동할 거리: 양(+)의 방향으로 20만큼
+        '''
+        if self.running:
+            self.canvas.move(self.player, distance, 0)
+
+    def shoot(self, event, color='yellow'):
+        '''총알 발사 함수'''
+        if self.running:
+            # 플레이어 현재 좌표 추출
+            x1, y1, x2, y2 = self.canvas.coords(self.player)
+            # 추출된 좌표를 참고하여 총알 생성
+            bullet = self.canvas.create_rectangle(x1+15, y1-10, x2-15, y1, fill=color)
+            # __init__ 함수에서 생성한 총알 리스트에 등록
+            self.bullets.append(bullet)
