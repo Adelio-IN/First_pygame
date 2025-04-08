@@ -25,4 +25,36 @@ class ShootingGame:
         self.score = 1 # 적을 맞췄을 때 점수
         self.failures = 0 # 적을 놓친 횟수
         self.collisions = 0 #적과 충돌한 횟수
-        
+        self.running = False # 상태 관리 변수
+
+        # 키보드에서 화살표 키를 눌렀을 때 작동할 함수 등록
+        self.window.bind("<Left>", self.move_left)
+        self.window.bind("<Right>", self.move_right)
+        self.window.bind("<space>", self.shoot)
+
+        self.start_button = tk.Button(
+            self.window,
+            text="Start",
+            command=self.start_game
+        )
+        self.start_button.pack(side=tk.LEFT)
+
+        self.pause_button = tk.Button(
+            self.window,
+            text="Pause",
+            command=self.pause_game
+        )
+        self.pause_button.pack(side=tk.LEFT)
+
+        self.resume_button = tk.Button(
+            self.window,
+            text="Resume",
+            command=self.resume_game)
+        self.resume_button.pack(side=tk.LEFT)
+
+        self.exit_button = tk.Button(
+            self.window,
+            text="Exit",
+            command=self.exit_game
+        )
+        self.exit_button.pack(side=tk.LEFT) # 왼쪽 공간에 이어 붙이기
